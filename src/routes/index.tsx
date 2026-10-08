@@ -22,7 +22,7 @@ function StillStuck() {
     e.preventDefault();
     const parsed = contactSchema.safeParse({ name, email, message });
     if (!parsed.success) {
-      toast.error(parsed.error.issues[0].message);
+      toast.error(parsed.error.issues[0]?.message ?? "Please check the form.");
       return;
     }
     setSending(true);
