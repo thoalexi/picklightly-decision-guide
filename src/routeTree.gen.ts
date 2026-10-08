@@ -10,33 +10,92 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CompareRouteImport } from './routes/compare'
+import { Route as FilterRouteImport } from './routes/filter'
+import { Route as GoodEnoughRouteImport } from './routes/good-enough'
+import { Route as LogRouteImport } from './routes/log'
+import { Route as SecondGuessingRouteImport } from './routes/second-guessing'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FilterRoute = FilterRouteImport.update({
+  id: '/filter',
+  path: '/filter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GoodEnoughRoute = GoodEnoughRouteImport.update({
+  id: '/good-enough',
+  path: '/good-enough',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogRoute = LogRouteImport.update({
+  id: '/log',
+  path: '/log',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecondGuessingRoute = SecondGuessingRouteImport.update({
+  id: '/second-guessing',
+  path: '/second-guessing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/compare': typeof CompareRoute
+  '/filter': typeof FilterRoute
+  '/good-enough': typeof GoodEnoughRoute
+  '/log': typeof LogRoute
+  '/second-guessing': typeof SecondGuessingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/compare': typeof CompareRoute
+  '/filter': typeof FilterRoute
+  '/good-enough': typeof GoodEnoughRoute
+  '/log': typeof LogRoute
+  '/second-guessing': typeof SecondGuessingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/compare': typeof CompareRoute
+  '/filter': typeof FilterRoute
+  '/good-enough': typeof GoodEnoughRoute
+  '/log': typeof LogRoute
+  '/second-guessing': typeof SecondGuessingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/compare' | '/filter' | '/good-enough' | '/log' | '/second-guessing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    '/' | '/compare' | '/filter' | '/good-enough' | '/log' | '/second-guessing'
+  id:
+    | '__root__'
+    | '/'
+    | '/compare'
+    | '/filter'
+    | '/good-enough'
+    | '/log'
+    | '/second-guessing'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CompareRoute: typeof CompareRoute
+  FilterRoute: typeof FilterRoute
+  GoodEnoughRoute: typeof GoodEnoughRoute
+  LogRoute: typeof LogRoute
+  SecondGuessingRoute: typeof SecondGuessingRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +107,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/filter': {
+      id: '/filter'
+      path: '/filter'
+      fullPath: '/filter'
+      preLoaderRoute: typeof FilterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/good-enough': {
+      id: '/good-enough'
+      path: '/good-enough'
+      fullPath: '/good-enough'
+      preLoaderRoute: typeof GoodEnoughRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/log': {
+      id: '/log'
+      path: '/log'
+      fullPath: '/log'
+      preLoaderRoute: typeof LogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/second-guessing': {
+      id: '/second-guessing'
+      path: '/second-guessing'
+      fullPath: '/second-guessing'
+      preLoaderRoute: typeof SecondGuessingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CompareRoute: CompareRoute,
+  FilterRoute: FilterRoute,
+  GoodEnoughRoute: GoodEnoughRoute,
+  LogRoute: LogRoute,
+  SecondGuessingRoute: SecondGuessingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
