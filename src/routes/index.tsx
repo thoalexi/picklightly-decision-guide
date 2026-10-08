@@ -75,6 +75,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "picklightly — you've thought about it enough" },
+      { property: "og:title", content: "picklightly — decision toolkit for everyday overthinkers" },
 
       { name: "description", content: "A practical decision toolkit for everyday overthinkers. Match your effort to the stakes and stop reopening decisions." },
       { property: "og:title", content: "Picklightly — Decision toolkit for everyday overthinkers" },
