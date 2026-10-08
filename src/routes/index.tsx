@@ -3,11 +3,12 @@ import { useState } from "react";
 import { Card } from "@/components/ui-kit";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Picklightly — You've thought about it enough" },
       { name: "description", content: "A practical decision toolkit for everyday overthinkers. Match your effort to the stakes and stop reopening decisions." },
-      { property: "og:title", content: "Picklightly — You've thought about it enough" },
+      { property: "og:title", content: "Picklightly — Decision toolkit for everyday overthinkers" },
       { property: "og:description", content: "Match decision effort to decision stakes with the CLEAR method." },
     ],
   }),
@@ -46,10 +47,10 @@ function Home() {
   return (
     <div className="paper-texture">
       <section className="mx-auto max-w-3xl px-4 pt-20 pb-16 text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">For everyday overthinkers</p>
-        <h1 className="mt-4 text-5xl font-semibold leading-tight tracking-tight md:text-7xl">
+        <h1 className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Picklightly — a decision toolkit for everyday overthinkers</h1>
+        <p className="mt-4 font-display text-5xl font-semibold leading-tight tracking-tight md:text-7xl">
           You've thought about it <em className="text-primary">enough.</em>
-        </h1>
+        </p>
         <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
           Make a reasonable decision, understand why you made it, and know when to stop reopening it.
         </p>

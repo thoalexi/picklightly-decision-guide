@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Btn, Card, PageHeader } from "@/components/ui-kit";
 
 export const Route = createFileRoute("/compare")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Comparison Lab — Picklightly" },
@@ -60,7 +61,7 @@ function Compare() {
                   <td className="p-2 text-center"><input type="checkbox" checked={c.must} onChange={(e) => setCrits(crits.map((x, i) => (i === ci ? { ...x, must: e.target.checked } : x)))} className="accent-primary" /></td>
                   {options.map((_, oi) => (
                     <td key={oi} className="p-2 text-center">
-                      <select value={s(oi, ci)} onChange={(e) => setScores({ ...scores, [`${oi}-${ci}`]: +e.target.value })} className="rounded-lg border border-input bg-background px-2 py-1">
+                      <select aria-label="Score for this option" value={s(oi, ci)} onChange={(e) => setScores({ ...scores, [`${oi}-${ci}`]: +e.target.value })} className="rounded-lg border border-input bg-background px-2 py-1">
                         {[1, 2, 3, 4, 5].map((n) => <option key={n}>{n}</option>)}
                       </select>
                     </td>

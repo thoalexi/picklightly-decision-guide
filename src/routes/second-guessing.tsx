@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Btn, Card, PageHeader } from "@/components/ui-kit";
 
 export const Route = createFileRoute("/second-guessing")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Second-Guessing Check — Picklightly" },

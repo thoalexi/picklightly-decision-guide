@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Btn, Card, PageHeader } from "@/components/ui-kit";
 
 export const Route = createFileRoute("/filter")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "60-Second Decision Filter — Picklightly" },

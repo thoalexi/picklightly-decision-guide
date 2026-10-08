@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://picklightly-decision-guide.lovable.app/sitemap.xml
