@@ -164,6 +164,8 @@ function Home() {
           ))}
         </div>
       </section>
+
+      <StillStuck />
     </div>
   );
 }
