@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Btn, Card, PageHeader } from "@/components/ui-kit";
 
@@ -37,6 +37,9 @@ function Compare() {
   return (
     <div>
       <PageHeader eyebrow="Tool 2" title="The Comparison Lab" intro="Score each option 1–5. Mark deal-breakers: anything scoring 2 or less on one is out." />
+      <p className="-mt-6 mb-6 text-center text-sm text-muted-foreground">
+        This works like a Pugh matrix. <Link to="/pugh-matrix" className="text-primary underline">Read the quick guide</Link>.
+      </p>
       <div className="mx-auto max-w-5xl space-y-6 px-4 pb-20">
         <Card className="overflow-x-auto">
           <table className="w-full text-sm">
