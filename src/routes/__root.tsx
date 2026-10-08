@@ -47,10 +47,10 @@ function Header() {
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
         <Link to="/" className="flex items-center gap-2">
           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-display text-lg font-semibold text-primary-foreground">
-            P
+            p
           </span>
           <span className="font-display text-xl font-semibold tracking-tight">
-            Picklightly
+            picklightly
           </span>
         </Link>
         <nav className="flex flex-wrap items-center gap-1 text-sm">
@@ -90,8 +90,8 @@ function Footer() {
   return (
     <footer className="border-t border-border py-8">
       <div className="mx-auto max-w-5xl px-4 text-center text-sm text-muted-foreground">
-        <p className="font-display text-lg text-foreground">Picklightly</p>
-        <p className="mt-1">Less spiraling. More living.</p>
+<p className="font-display text-lg text-foreground">picklightly</p>
+        <p className="mt-1">less spiraling. more living.</p>
         <p className="mt-3 text-xs">
           An educational decision aid — not therapy or medical advice.
         </p>
