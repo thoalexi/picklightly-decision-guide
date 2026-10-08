@@ -15,6 +15,7 @@ import { Route as CompareRouteImport } from './routes/compare'
 import { Route as FilterRouteImport } from './routes/filter'
 import { Route as GoodEnoughRouteImport } from './routes/good-enough'
 import { Route as LogRouteImport } from './routes/log'
+import { Route as PughMatrixRouteImport } from './routes/pugh-matrix'
 import { Route as SecondGuessingRouteImport } from './routes/second-guessing'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 
@@ -48,6 +49,11 @@ const LogRoute = LogRouteImport.update({
   path: '/log',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PughMatrixRoute = PughMatrixRouteImport.update({
+  id: '/pugh-matrix',
+  path: '/pugh-matrix',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SecondGuessingRoute = SecondGuessingRouteImport.update({
   id: '/second-guessing',
   path: '/second-guessing',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/filter': typeof FilterRoute
   '/good-enough': typeof GoodEnoughRoute
   '/log': typeof LogRoute
+  '/pugh-matrix': typeof PughMatrixRoute
   '/second-guessing': typeof SecondGuessingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/filter': typeof FilterRoute
   '/good-enough': typeof GoodEnoughRoute
   '/log': typeof LogRoute
+  '/pugh-matrix': typeof PughMatrixRoute
   '/second-guessing': typeof SecondGuessingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/filter': typeof FilterRoute
   '/good-enough': typeof GoodEnoughRoute
   '/log': typeof LogRoute
+  '/pugh-matrix': typeof PughMatrixRoute
   '/second-guessing': typeof SecondGuessingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/filter'
     | '/good-enough'
     | '/log'
+    | '/pugh-matrix'
     | '/second-guessing'
     | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/filter'
     | '/good-enough'
     | '/log'
+    | '/pugh-matrix'
     | '/second-guessing'
     | '/sitemap.xml'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/filter'
     | '/good-enough'
     | '/log'
+    | '/pugh-matrix'
     | '/second-guessing'
     | '/sitemap.xml'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   FilterRoute: typeof FilterRoute
   GoodEnoughRoute: typeof GoodEnoughRoute
   LogRoute: typeof LogRoute
+  PughMatrixRoute: typeof PughMatrixRoute
   SecondGuessingRoute: typeof SecondGuessingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pugh-matrix': {
+      id: '/pugh-matrix'
+      path: '/pugh-matrix'
+      fullPath: '/pugh-matrix'
+      preLoaderRoute: typeof PughMatrixRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/second-guessing': {
       id: '/second-guessing'
       path: '/second-guessing'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   FilterRoute: FilterRoute,
   GoodEnoughRoute: GoodEnoughRoute,
   LogRoute: LogRoute,
+  PughMatrixRoute: PughMatrixRoute,
   SecondGuessingRoute: SecondGuessingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
