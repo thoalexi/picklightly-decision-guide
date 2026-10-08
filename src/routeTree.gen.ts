@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as FilterRouteImport } from './routes/filter'
 import { Route as GoodEnoughRouteImport } from './routes/good-enough'
@@ -19,6 +20,11 @@ import { Route as SecondGuessingRouteImport } from './routes/second-guessing'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompareRoute = CompareRouteImport.update({
@@ -49,6 +55,7 @@ const SecondGuessingRoute = SecondGuessingRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/compare': typeof CompareRoute
   '/filter': typeof FilterRoute
   '/good-enough': typeof GoodEnoughRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/compare': typeof CompareRoute
   '/filter': typeof FilterRoute
   '/good-enough': typeof GoodEnoughRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/compare': typeof CompareRoute
   '/filter': typeof FilterRoute
   '/good-enough': typeof GoodEnoughRoute
@@ -75,13 +84,26 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/compare' | '/filter' | '/good-enough' | '/log' | '/second-guessing'
+    | '/'
+    | '/auth'
+    | '/compare'
+    | '/filter'
+    | '/good-enough'
+    | '/log'
+    | '/second-guessing'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/compare' | '/filter' | '/good-enough' | '/log' | '/second-guessing'
+    | '/'
+    | '/auth'
+    | '/compare'
+    | '/filter'
+    | '/good-enough'
+    | '/log'
+    | '/second-guessing'
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/compare'
     | '/filter'
     | '/good-enough'
@@ -91,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   CompareRoute: typeof CompareRoute
   FilterRoute: typeof FilterRoute
   GoodEnoughRoute: typeof GoodEnoughRoute
@@ -105,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/compare': {
@@ -147,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   CompareRoute: CompareRoute,
   FilterRoute: FilterRoute,
   GoodEnoughRoute: GoodEnoughRoute,

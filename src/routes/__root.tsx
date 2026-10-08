@@ -4,14 +4,17 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useNavigate,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import type { User } from "@supabase/supabase-js";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { supabase } from "@/integrations/supabase/client";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -23,6 +26,22 @@ const navLinks = [
 ] as const;
 
 function Header() {
+  const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setUser(session?.user ?? null);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    navigate({ to: "/", replace: true });
+  };
+
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
@@ -46,6 +65,21 @@ function Header() {
               {l.label}
             </Link>
           ))}
+          {user ? (
+            <button
+              onClick={signOut}
+              className="rounded-full border border-border px-3 py-1.5 text-muted-foreground transition-colors hover:bg-muted"
+            >
+              Sign out
+            </button>
+          ) : (
+            <Link
+              to="/auth"
+              className="rounded-full border border-border px-3 py-1.5 text-muted-foreground transition-colors hover:bg-muted"
+            >
+              Sign in
+            </Link>
+          )}
         </nav>
       </div>
     </header>
