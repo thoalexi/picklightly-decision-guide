@@ -10,6 +10,7 @@ import {
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
+import { Menu, X } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
 
 import appCss from "../styles.css?url";
@@ -28,6 +29,7 @@ const navLinks = [
 
 function Header() {
   const [user, setUser] = useState<User | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,22 +41,44 @@ function Header() {
   }, []);
 
   const signOut = async () => {
+    setMenuOpen(false);
     await supabase.auth.signOut();
     navigate({ to: "/", replace: true });
   };
 
+  const authAction = user ? (
+    <button
+      onClick={signOut}
+      className="rounded-full border border-border px-3 py-1.5 text-muted-foreground transition-colors hover:bg-muted"
+    >
+      Sign out
+    </button>
+  ) : (
+    <Link
+      to="/auth"
+      onClick={() => setMenuOpen(false)}
+      className="rounded-full border border-border px-3 py-1.5 text-muted-foreground transition-colors hover:bg-muted"
+    >
+      Sign in
+    </Link>
+  );
+
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
-      <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
-        <Link to="/" className="flex items-center gap-2">
-<span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-display text-lg font-semibold leading-none text-primary-foreground">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
+        <Link
+          to="/"
+          className="flex items-center gap-2"
+          onClick={() => setMenuOpen(false)}
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-display text-lg font-semibold leading-none text-primary-foreground">
             <span className="-translate-y-[3px]">p</span>
           </span>
           <span className="font-display text-xl font-semibold tracking-tight">
             picklightly
           </span>
         </Link>
-        <nav className="flex flex-wrap items-center gap-1 text-sm">
+        <nav className="hidden flex-wrap items-center gap-1 text-sm md:flex">
           {navLinks.map((l) => (
             <Link
               key={l.to}
@@ -66,23 +90,39 @@ function Header() {
               {l.label}
             </Link>
           ))}
-          {user ? (
-            <button
-              onClick={signOut}
-              className="rounded-full border border-border px-3 py-1.5 text-muted-foreground transition-colors hover:bg-muted"
-            >
-              Sign out
-            </button>
-          ) : (
-            <Link
-              to="/auth"
-              className="rounded-full border border-border px-3 py-1.5 text-muted-foreground transition-colors hover:bg-muted"
-            >
-              Sign in
-            </Link>
-          )}
+          {authAction}
         </nav>
+        <button
+          type="button"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((o) => !o)}
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-muted md:hidden"
+        >
+          {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
+      {menuOpen && (
+        <nav className="border-t border-border bg-background px-4 py-3 md:hidden">
+          <div className="mx-auto flex max-w-5xl flex-col gap-1 text-sm">
+            {navLinks.map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                onClick={() => setMenuOpen(false)}
+                activeOptions={{ exact: l.to === "/" }}
+                className="rounded-xl px-3 py-2.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-secondary-foreground"
+                activeProps={{
+                  className: "bg-primary text-primary-foreground",
+                }}
+              >
+                {l.label}
+              </Link>
+            ))}
+            <div className="pt-1">{authAction}</div>
+          </div>
+        </nav>
+      )}
     </header>
   );
 }
