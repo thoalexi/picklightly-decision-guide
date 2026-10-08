@@ -62,10 +62,21 @@ function Auth() {
 
   const google = async () => {
     setError(null);
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-    });
-    if (result.error) setError("Google sign-in didn't work. Please try again.");
+    try {
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: `${window.location.origin}/auth`,
+      });
+      if (result.error) {
+        console.error("Google sign-in error", result.error);
+        setError(`Google sign-in didn't work: ${result.error.message ?? "please try again."}`);
+        return;
+      }
+      if (result.redirected) return;
+      navigate({ to: "/log", replace: true });
+    } catch (e) {
+      console.error("Google sign-in error", e);
+      setError("Google sign-in didn't work. Please try again.");
+    }
   };
 
   return (
