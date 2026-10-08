@@ -14,7 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      decision_entries: {
+        Row: {
+          choice: string
+          confidence: number
+          created_at: string
+          decision: string
+          id: string
+          outcome: string
+          reasoning: string
+          revisit_if: string
+          user_id: string
+        }
+        Insert: {
+          choice?: string
+          confidence?: number
+          created_at?: string
+          decision: string
+          id?: string
+          outcome?: string
+          reasoning?: string
+          revisit_if?: string
+          user_id: string
+        }
+        Update: {
+          choice?: string
+          confidence?: number
+          created_at?: string
+          decision?: string
+          id?: string
+          outcome?: string
+          reasoning?: string
+          revisit_if?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
