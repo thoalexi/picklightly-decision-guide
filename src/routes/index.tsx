@@ -74,7 +74,9 @@ export const Route = createFileRoute("/")({
   staticData: { sitemap: true },
   head: () => ({
     meta: [
-      { title: "Picklightly — You've thought about it enough" },
+      { title: "picklightly — you've thought about it enough" },
+      { property: "og:title", content: "picklightly — decision toolkit for everyday overthinkers" },
+
       { name: "description", content: "A practical decision toolkit for everyday overthinkers. Match your effort to the stakes and stop reopening decisions." },
       { property: "og:title", content: "Picklightly — Decision toolkit for everyday overthinkers" },
       { property: "og:description", content: "Match decision effort to decision stakes with the CLEAR method." },
