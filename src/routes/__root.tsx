@@ -15,6 +15,7 @@ import type { User } from "@supabase/supabase-js";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { supabase } from "@/integrations/supabase/client";
+import { Toaster } from "@/components/ui/sonner";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -214,6 +215,7 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
+        <Toaster />
       </div>
     </QueryClientProvider>
   );
