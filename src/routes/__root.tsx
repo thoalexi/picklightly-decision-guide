@@ -47,7 +47,7 @@ function Header() {
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3">
         <Link to="/" className="flex items-center gap-2">
 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary font-display text-lg font-semibold leading-none text-primary-foreground">
-            <span className="translate-y-[1px]">p</span>
+            <span className="-translate-y-[3px]">p</span>
           </span>
           <span className="font-display text-xl font-semibold tracking-tight">
             picklightly
