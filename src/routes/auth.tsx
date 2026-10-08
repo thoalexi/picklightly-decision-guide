@@ -5,6 +5,7 @@ import { lovable } from "@/integrations/lovable/index";
 import { Btn, Card, Field } from "@/components/ui-kit";
 
 export const Route = createFileRoute("/auth")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Sign in — Picklightly" },
@@ -84,7 +85,7 @@ function Auth() {
       <div className="text-center">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Your account</p>
         <h1 className="mt-3 text-4xl font-semibold tracking-tight">
-          {mode === "signin" ? "Welcome back" : "Create your account"}
+          {mode === "signin" ? "Sign in to Picklightly" : "Create your Picklightly account"}
         </h1>
         <p className="mt-3 text-muted-foreground">
           Sign in to save your decision log and pick it up on any device.

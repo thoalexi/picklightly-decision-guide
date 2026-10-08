@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Btn, Card, Field, PageHeader } from "@/components/ui-kit";
 
 export const Route = createFileRoute("/good-enough")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Good-Enough Test — Picklightly" },
@@ -87,7 +88,7 @@ function GoodEnough() {
             {reqs.map((r, i) => (
               <div key={i} className="flex items-center justify-between rounded-xl bg-muted px-3 py-2 text-sm">
                 {r}
-                <button onClick={() => { setReqs(reqs.filter((_, j) => j !== i)); setChecks([]); }} className="text-muted-foreground hover:text-destructive">×</button>
+                <button onClick={() => { setReqs(reqs.filter((_, j) => j !== i)); setChecks([]); }} aria-label="Remove requirement" className="text-muted-foreground hover:text-destructive">×</button>
               </div>
             ))}
             <div className="flex gap-2">

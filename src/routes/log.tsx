@@ -6,6 +6,7 @@ import { Area, Btn, Card, Field, PageHeader } from "@/components/ui-kit";
 import { loadLog, saveLog } from "@/lib/decision-log";
 
 export const Route = createFileRoute("/log")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Decision Log — Picklightly" },
