@@ -78,7 +78,7 @@ function Header() {
             picklightly
           </span>
         </Link>
-        <nav className="hidden flex-wrap items-center gap-1 text-sm lg:flex">
+        <nav className="hidden flex-wrap items-center gap-1 text-sm md:flex">
           {navLinks.map((l) => (
             <Link
               key={l.to}
@@ -97,13 +97,13 @@ function Header() {
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((o) => !o)}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-muted lg:hidden"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-muted md:hidden"
         >
           {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
       {menuOpen && (
-        <nav className="border-t border-border bg-background px-4 py-3 lg:hidden">
+        <nav className="border-t border-border bg-background px-4 py-3 md:hidden">
           <div className="mx-auto flex max-w-5xl flex-col gap-1 text-sm">
             {navLinks.map((l) => (
               <Link
