@@ -16,6 +16,7 @@ import { Route as FilterRouteImport } from './routes/filter'
 import { Route as GoodEnoughRouteImport } from './routes/good-enough'
 import { Route as LogRouteImport } from './routes/log'
 import { Route as SecondGuessingRouteImport } from './routes/second-guessing'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const SecondGuessingRoute = SecondGuessingRouteImport.update({
   path: '/second-guessing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/good-enough': typeof GoodEnoughRoute
   '/log': typeof LogRoute
   '/second-guessing': typeof SecondGuessingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/good-enough': typeof GoodEnoughRoute
   '/log': typeof LogRoute
   '/second-guessing': typeof SecondGuessingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/good-enough': typeof GoodEnoughRoute
   '/log': typeof LogRoute
   '/second-guessing': typeof SecondGuessingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/good-enough'
     | '/log'
     | '/second-guessing'
+    | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/good-enough'
     | '/log'
     | '/second-guessing'
+    | '/sitemap.xml'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/good-enough'
     | '/log'
     | '/second-guessing'
+    | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   GoodEnoughRoute: typeof GoodEnoughRoute
   LogRoute: typeof LogRoute
   SecondGuessingRoute: typeof SecondGuessingRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SecondGuessingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   GoodEnoughRoute: GoodEnoughRoute,
   LogRoute: LogRoute,
   SecondGuessingRoute: SecondGuessingRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
