@@ -131,7 +131,7 @@ function GoodEnough() {
             <h2 className="text-xl font-semibold">2. Score each option 1–5 on every requirement</h2>
             <p className="text-sm text-muted-foreground">1 = falls short, 5 = nails it. Weights do the rest of the math for you.</p>
             {options.map((o, oi) => {
-              const res = results[oi];
+              const res = results[oi] ?? { pct: 0, complete: false };
               return (
                 <div key={o.id} className={`space-y-3 rounded-xl border p-4 ${winner?.option.id === o.id ? "border-primary" : "border-border"}`}>
                   <div className="flex items-center justify-between gap-2">
