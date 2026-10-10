@@ -1,33 +1,28 @@
-# Add consultation options to the "Still stuck?" section
+# Enhance the Good-Enough Test with multiple options + Still Stuck copy
 
-## What changes
+Two changes, both on existing pages with no design overhaul.
 
-Under the existing "Still stuck?" heading and intro on the homepage, add two short lines:
+## 1. Good-Enough Test: check several options side by side
 
-1. A note that video or text consultation is available — shown as two small pills: **Video consult** and **Text consult**.
-2. The sentence: "We can talk about your specific time, budget, motivation, and restrictions."
+Today the tool only tracks one option at a time, so ticking boxes feels pointless — there's nothing to compare against. Keep the current look and flow (category pills → step 1 requirements → step 2 checking), but step 2 becomes a list of options:
 
-The rest of the section stays as is: the intro about 1:1 help from a Dr. of Psychology, the name/email/decision form, and the confirmation message after sending.
+- **"2. Now check your options — does each one meet every requirement?"**
+- Each option gets its own card: a name field (with the category-specific placeholder, e.g. "Which apartment? (e.g. Unit 4B, Oakview)") and the same requirement checkboxes under it.
+- An **+ Add another option** button appends a new option card (up to 5). Each option can be removed with an ×.
+- Verdict logic, unchanged in spirit: as soon as one option has every requirement ticked, show the existing amber "…is good enough. [Book it / Apply it / Buy it]. You're done." card naming that option. Options that don't clear the bar show a small "doesn't clear your bar yet" note inline, so users can see at a glance which option is winning.
+- Category switching resets everything, as today.
 
-## How it will read
+Technical: in `src/routes/good-enough.tsx` replace the single `opt` / `checks` / `checkedOnce` state with `options: { name: string; checks: boolean[] }[]`; derive `allChecked` per option; render option cards with `.map()`. Category data (`categories` record, examples, doneVerb) and all styling tokens stay exactly as they are. No backend changes.
 
-```text
-Still stuck?
+## 2. Still Stuck section: consultation options
 
-Get 1:1 help with your decision from a Dr. of Psychology with experience in
-efficiency, optimization, bandwidth, and ADHD.
+In the "Still stuck?" block on the homepage (`src/routes/index.tsx`), under the existing intro sentence, add:
 
-[ Video consult ]  [ Text consult ]
+- Two small pills: **Video consult** and **Text consult**.
+- The line: "We can talk about your specific time, budget, motivation, and restrictions."
 
-We can talk about your specific time, budget, motivation, and restrictions.
+Form, styling, and where messages are saved stay unchanged.
 
-        [ Your name ]  [ Email ]  [ What decision... ]
-                    ( Get in touch )
-```
+## Verification
 
-## Technical details
-
-- One file: `src/routes/index.tsx`, inside the `StillStuck` component's heading block (the `<div className="text-center">` above the form).
-- New markup: a centered flex row of two pills using existing tokens (`rounded-full border border-border bg-secondary px-3 py-1 text-sm text-secondary-foreground`), then a `text-muted-foreground` sentence below it. Wraps cleanly on narrow screens.
-- No new colors, fonts, components, tables, or routes. No change to form fields, validation, or where messages are saved.
-- Verify with a fresh build log read and screenshots of the section at desktop and phone widths.
+Fresh build log check, plus Playwright screenshots of both pages: the Good-Enough Test with two options added (one clearing the bar, one not) and the Still Stuck section at desktop and phone widths.
