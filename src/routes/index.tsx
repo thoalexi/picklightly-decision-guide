@@ -44,6 +44,13 @@ function StillStuck() {
             Get 1:1 help with your decision from a Dr. of Psychology with experience in
             efficiency, optimization, bandwidth, and ADHD.
           </p>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+            <span className="rounded-full border border-border bg-secondary px-3 py-1 text-sm text-secondary-foreground">Video consult</span>
+            <span className="rounded-full border border-border bg-secondary px-3 py-1 text-sm text-secondary-foreground">Text consult</span>
+          </div>
+          <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
+            We can talk about your specific time, budget, motivation, and restrictions.
+          </p>
         </div>
         {sent ? (
           <p className="mt-8 rounded-xl bg-secondary p-6 text-center text-secondary-foreground">
